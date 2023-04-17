@@ -1,5 +1,5 @@
 import { Configuration, OpenAIApi } from "openai";
-import { writeFileSync } from "fs";
+import { writeFileSync, readFileSync } from "fs";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -10,8 +10,6 @@ const config = new Configuration({
 
 // Initialize the OpenAI API client with your API key
 const openai = new OpenAIApi(config);
-
-const questions = ["Me recomende um bom monitor para trabalho sendo um desenvolvedor", "Diga os personagens mais famosos de Naruto e detlahe a participação deles na tripulação"];
 
 const prompt = (question: string) => `${question} Seja objetivo:`;
 
@@ -28,17 +26,20 @@ async function generateAnswer(question: string): Promise<string> {
   return answer;
 }
 
-// Define a function to generate answers for all questions in the array and write them to a file
-async function generateAnswersToFile(
-  questions: string[],
-  outputFile: string
-): Promise<void> {
+// Define a function to generate answers for all questions in the file and write them to a file
+async function generateAnswersToFile(outputFile: string): Promise<void> {
+  const questions = readFileSync("questions.txt", "utf-8").split("\n").filter(Boolean);
   const answers: string[] = [];
+  console.log('Loading...')
 
-  for (const question of questions) {
-    const answer = await generateAnswer(question);
-    answers.push(answer);
-  }
+  // Wait for all promises to resolve before writing to the file
+  await Promise.all(
+    questions.map(async (question, index) => {
+      const answer = await generateAnswer(question);
+      const formattedAnswer = `Answer ${index + 1}: ${answer}`;
+      answers.push(formattedAnswer);
+    })
+  );
 
   // Write the generated answers to a file
   writeFileSync(outputFile, answers.join("\n"));
@@ -48,6 +49,5 @@ async function generateAnswersToFile(
   );
 }
 
-// Call the generateAnswersToFile function with the array of questions and the output file name
-generateAnswersToFile(questions, 'answers.txt');
-// printAnswer(questions[0]);
+// Call the generateAnswersToFile function with the output file name
+generateAnswersToFile('answers.txt');
