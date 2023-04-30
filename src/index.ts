@@ -1,4 +1,3 @@
-import { generateAnswer } from "./core/generateAnswer";
 import { extractSpanTexts } from "./core/extractText";
 import { saveTextsToFile, readFile } from "./utils/fileHandler";
 import { join } from "path";
