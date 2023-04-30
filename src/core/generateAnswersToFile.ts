@@ -17,15 +17,15 @@ export async function generateAnswersToFile(outputFile: string, questionsFilePat
 async function generateFormattedAnswers(questions: string[]): Promise<string[]> {
   const formattedAnswers: string[] = [];
 
-  await Promise.all(
-    questions.map(async (question, index) => {
-      const answer = await generateAnswer(question);
-      const formattedAnswer = `${index + 1}. ${answer}`;
-      formattedAnswers.push(formattedAnswer);
-    })
-  );
+  for (let index = 0; index < questions.length; index++) {
+    const question = questions[index];
+    const answer = await generateAnswer(question);
+    const formattedAnswer = `${index + 1}. ${answer}`;
+    formattedAnswers.push(formattedAnswer);
+  }
 
   return formattedAnswers;
 }
+
 
 

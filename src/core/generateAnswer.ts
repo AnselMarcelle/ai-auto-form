@@ -3,7 +3,7 @@ import { openAiConfig } from "../utils/config.js";
 
 const openai = new OpenAIApi(openAiConfig);
 
-const prompt = (question: string) => `${question} Seja objetivo:`;
+const prompt = (question: string) => `${question}. be objective`;
 
 export async function generateAnswer(question: string): Promise<string> {
   const response = await openai.createChatCompletion({
