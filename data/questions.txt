@@ -1,0 +1,22 @@
+What is "self-supervised learning"?
+What is a "language model"?
+Why is a language model considered self-supervised?
+What are self-supervised models usually used for?
+Why do we fine-tune language models?
+What are the three steps to create a state-of-the-art text classifier?
+How do the 50,000 unlabeled movie reviews help us create a better text classifier for the IMDb dataset?
+What are the three steps to prepare your data for a language model?
+What is "tokenization"? Why do we need it?
+Name three different approaches to tokenization.
+What is `xxbos`?
+List four rules that fastai applies to text during tokenization.
+Why are repeated characters replaced with a token showing the number of repetitions and the character that's repeated?
+What is "numericalization"?
+Why might there be words that are replaced with the "unknown word" token?
+With a batch size of 64, the first row of the tensor representing the first batch contains the first 64 tokens for the dataset. What does the second row of that tensor contain? What does the first row of the second batch contain?
+Why do we need padding for text classification? Why don't we need it for language modeling?
+What does an embedding matrix for NLP contain? What is its shape?
+What is "perplexity"?
+Why do we have to pass the vocabulary of the language model to the classifier data block?
+What is "gradual unfreezing"?
+Why is text generation always likely to be ahead of automatic identification of machine-generated texts?
