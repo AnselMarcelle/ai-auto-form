@@ -24,23 +24,8 @@ This project allows you to send multiple questions to GPT-3.5 and receive multip
 
 # Usage
 
-1. Extract the questions from the HTML file and save them in the `questions.txt` file:
-
-1. Save the questions in the `questions.txt` file by running:
-    ```bash
-    npm run start
-    ```
-    Choose `saveTexts` when prompted.
-
-1. Check the generated questions in the `questions.txt` file located in the `data` folder.
-
-1. Generate the answers and save them in the `answers.txt` file:
-    ```bash
-    npm run start
-    ```
-    Choose `generateAnswers` when prompted.
-
-1. Check the generated answers in the `answers.txt` file located in the `data` folder.
+1. Run `npm run start` to start the program.
+1. Check the result file with questions and answers in the `data/data.json` file.
 
 # Customization
 
