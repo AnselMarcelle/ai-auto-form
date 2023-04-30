@@ -16,7 +16,7 @@ This project allows you to send multiple questions to GPT-3.5 and receive multip
     ```bash
     OPENAI_API_KEY=yourapikey
     ```
-1. Place your HTML file with questions inside the `data` folder.
+1. Place your HTML file, called `example.html` with questions inside the `data` folder.
 1. Install the required dependencies:
     ```bash
     npm install
