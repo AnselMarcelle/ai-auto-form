@@ -20,7 +20,7 @@ async function generateFormattedAnswers(questions: string[]): Promise<string[]> 
   for (let index = 0; index < questions.length; index++) {
     const question = questions[index];
     const answer = await generateAnswer(question);
-    const formattedAnswer = `${index + 1}. ${answer}`;
+    const formattedAnswer = `Answer ${index + 1}: ${answer}`;
     formattedAnswers.push(formattedAnswer);
   }
 
