@@ -30,9 +30,9 @@ async function main() {
   ]);
 
   if (inputMethod === "form") {
-    console.log("Please fill the example.html in the data folder with the source code of the Google Form.");
+    console.log("Please fill the example.html in the data folder with the source code of the Google Form. Remember to save the file.");
   } else if (inputMethod === "type") {
-    console.log("Please type the questions divided by 'Enter key' in the questions.txt file in the data folder.");
+    console.log("Please type the questions divided by 'Enter key' in the questions.txt file in the data folder. Remember to save the file.");
   }
 
   const { filledData } = await prompts([
