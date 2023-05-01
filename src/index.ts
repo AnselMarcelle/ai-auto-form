@@ -4,17 +4,11 @@ import {
   saveTextToJsonFile,
 } from "./utils/fileHandler";
 import { join } from "path";
-import { generateAnswersToTxtFile } from "./core/generateAnswersToFile";
+import { generateAnswersToJsonFile } from "./core/generateAnswersToFile";
 import prompts from "prompts";
 
-const htmlFilePath = join(__dirname, "../data/example.html");
+const htmlFilePath = join(__dirname, "../data/form.html");
 const dataFilePath = join(__dirname, "../data/data.json");
-const questionsFilePath = join(__dirname, "../data/questions.txt");
-const answersFilePath = join(__dirname, "../data/answers.txt");
-
-// Extract questions and save them to questions.txt
-const htmlString = readFile(htmlFilePath);
-const texts = extractSpanTexts(htmlString, "M7eMe");
 
 async function main() {
   const { inputMethod } = await prompts([
@@ -30,7 +24,7 @@ async function main() {
   ]);
 
   if (inputMethod === "form") {
-    console.log("Please fill the example.html in the data folder with the source code of the Google Form. Remember to save the file.");
+    console.log("Please fill the form.html in the data folder with the source code of the Google Form. Remember to save the file.");
   } else if (inputMethod === "type") {
     console.log("Please type the questions divided by 'Enter key' in the questions.txt file in the data folder. Remember to save the file.");
   }
@@ -48,6 +42,10 @@ async function main() {
   ]);
 
   if (filledData === "yes") {
+    // Extract questions and save them to questions.txt
+    const htmlString = readFile(htmlFilePath);
+    const texts = extractSpanTexts(htmlString, "M7eMe");
+
     saveTextToJsonFile(texts, dataFilePath);
     console.log("Data saved.")
   } else if (filledData === "no") {
@@ -69,7 +67,7 @@ async function main() {
 
   if (action === "yes") {
     // Replace these two lines with the appropriate function for generating answers.
-    generateAnswersToTxtFile(answersFilePath, questionsFilePath);
+    await generateAnswersToJsonFile(dataFilePath);
     console.log("Answers generated.");
   } else if (action === "no") {
     console.log("No answers generated.");
