@@ -7,8 +7,9 @@ import { join } from "path";
 import { generateAnswersToJsonFile } from "./core/generateAnswersToFile";
 import prompts from "prompts";
 
-const htmlFilePath = join(__dirname, "../data/form.html");
-const dataFilePath = join(__dirname, "../data/data.json");
+const htmlFormFilePath = join(__dirname, "../data/form.html");
+const textQuestionsFilePath = join(__dirname, "../data/questions.txt");
+const jsonDataFilePath = join(__dirname, "../data/data.json");
 
 async function main() {
   const { inputMethod } = await prompts([
@@ -43,11 +44,18 @@ async function main() {
 
   if (filledData === "yes") {
     // Extract questions and save them to questions.txt
-    const htmlString = readFile(htmlFilePath);
-    const texts = extractSpanTexts(htmlString, "M7eMe");
-
-    saveTextToJsonFile(texts, dataFilePath);
-    console.log("Data saved.")
+    if (inputMethod === 'form') {
+      const htmlString = readFile(htmlFormFilePath);
+      const texts = extractSpanTexts(htmlString, "M7eMe");
+  
+      saveTextToJsonFile(texts, jsonDataFilePath);
+      console.log("Data saved based on form.")
+    } else if (inputMethod === 'type') {
+      const texts = readFile(textQuestionsFilePath).split("\n");
+      
+      saveTextToJsonFile(texts, jsonDataFilePath);
+      console.log("Please fill the questions.txt file in the data folder with the questions divided by 'Enter key'. Remember to save the file.");
+    }
   } else if (filledData === "no") {
     console.log("Please fill the question data, otherwise the script won't work.");
     return;
@@ -67,7 +75,7 @@ async function main() {
 
   if (action === "yes") {
     // Replace these two lines with the appropriate function for generating answers.
-    await generateAnswersToJsonFile(dataFilePath);
+    await generateAnswersToJsonFile(jsonDataFilePath);
     console.log("Answers generated.");
   } else if (action === "no") {
     console.log("No answers generated.");
