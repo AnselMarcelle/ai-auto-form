@@ -28,7 +28,7 @@ This project allows you to send multiple questions to GPT-3.5 and receive multip
 
 # Customization
 
-You can customize the extraction of questions from the HTML file by modifying the `src/core/extractText.ts` file. For example, you can change the class name for the `span` elements containing the questions.
+To customize the extraction of questions from the HTML file, you can modify the src/core/extractText.ts file. For instance, you might adjust the class name for the span elements that contain the questions.
 
-You can also customize the GPT-3.5 settings, such as temperature and max tokens, by modifying the `src/core/generateAnswer.ts` file.
+Similarly, you can tweak the GPT-3.5 settings, such as temperature and max tokens, by editing the src/core/generateAnswer.ts file.
 
